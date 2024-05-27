@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20)
 //        label.text = "Recife"
-        label.textColor = UIColor(named: "primaryColor")
+        label.textColor = UIColor(named: "blueColor")
         label.textAlignment = .center
         return label
     }()
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 60, weight: .bold)
 //        label.text = "25ºC"
-        label.textColor = UIColor(named: "primaryColor")
+        label.textColor = UIColor(named: "blueColor")
         label.textAlignment = .left
         return label
     }()
