@@ -8,6 +8,18 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+  
+    private lazy var contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     private lazy var backgroundView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -158,16 +170,27 @@ class ViewController: UIViewController {
         return label
     }()
     
-    private lazy var dailyForecastTableView: UITableView = {
-        let tableView = UITableView()
+    private lazy var dailyForecastTableView: ContentSizedTableView = {
+        let tableView = ContentSizedTableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+//        tableView.invalidateIntrinsicContentSize()
         tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delegate = self
+//        tableView.isScrollEnabled = false
         tableView.register(DailyForecastTableViewCell.self, forCellReuseIdentifier: DailyForecastTableViewCell.identifier)
 //        tableView.register(DailyForecastTableViewCell.self, forCellReuseIdentifier: "id")
         tableView.separatorColor = UIColor.contrastColor
         return tableView
+    }()
+    
+    public lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        label.font = UIFont.preferredFont(forTextStyle: .title1) // title1, larger, title2 medium, title3 smaller
+        return label
     }()
     
     private lazy var loaderView: UIView = {
@@ -232,12 +255,41 @@ class ViewController: UIViewController {
     
     private func setHierachy() {
         view.addSubview(backgroundView)
-        view.addSubview(headerView)
-        view.addSubview(statsStackView)
-        view.addSubview(hourlyForecastLabel)
-        view.addSubview(hourlyCollectionView)
-        view.addSubview(dailyForecastLabel)
-        view.addSubview(dailyForecastTableView)
+        view.addSubview(scrollView)
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+        
+        scrollView.addSubview(contentView)
+        let heightConstraint = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        heightConstraint.priority = UILayoutPriority(500)
+        NSLayoutConstraint.activate([
+          contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+          contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+          contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+          contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+          contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+          heightConstraint,
+        ])
+        
+//        view.addSubview(backgroundView)
+//        view.addSubview(headerView)
+//        view.addSubview(statsStackView)
+//        view.addSubview(hourlyForecastLabel)
+//        view.addSubview(hourlyCollectionView)
+//        view.addSubview(dailyForecastLabel)
+//        view.addSubview(dailyForecastTableView)
+        
+        contentView.addSubview(headerView)
+        contentView.addSubview(statsStackView)
+        contentView.addSubview(hourlyForecastLabel)
+        contentView.addSubview(hourlyCollectionView)
+        contentView.addSubview(dailyForecastLabel)
+        contentView.addSubview(dailyForecastTableView)
+        contentView.addSubview(descriptionLabel)
         
         headerView.addSubview(cityLabel)
         headerView.addSubview(temperatureLabel)
@@ -270,7 +322,7 @@ class ViewController: UIViewController {
         ])
         
         //headerView
-        NSLayoutConstraint.activate([
+        /*NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60
             ),
@@ -281,6 +333,21 @@ class ViewController: UIViewController {
             
             headerView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor, constant: -35
+            ),
+            
+            headerView.heightAnchor.constraint(equalToConstant: 150)
+        ])*/
+        NSLayoutConstraint.activate([
+            headerView.topAnchor.constraint(
+                equalTo: contentView.topAnchor, constant: 60
+            ),
+            
+            headerView.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor, constant: 35
+            ),
+            
+            headerView.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor, constant: -35
             ),
             
             headerView.heightAnchor.constraint(equalToConstant: 150)
@@ -345,7 +412,7 @@ class ViewController: UIViewController {
         */
         
         //hourlyForecastLabel
-        NSLayoutConstraint.activate([
+        /*NSLayoutConstraint.activate([
             hourlyForecastLabel.topAnchor.constraint(equalTo: statsStackView.bottomAnchor, constant: 29),
             
             hourlyForecastLabel.leadingAnchor.constraint(
@@ -355,10 +422,21 @@ class ViewController: UIViewController {
             hourlyForecastLabel.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor, constant: -35
             ),
+        ])*/
+        NSLayoutConstraint.activate([
+            hourlyForecastLabel.topAnchor.constraint(equalTo: statsStackView.bottomAnchor, constant: 29),
+            
+            hourlyForecastLabel.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor, constant: 35
+            ),
+            
+            hourlyForecastLabel.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor, constant: -35
+            ),
         ])
         
         //hourlyForecastLabel
-        NSLayoutConstraint.activate([
+        /*NSLayoutConstraint.activate([
             hourlyCollectionView.topAnchor.constraint(equalTo: hourlyForecastLabel.bottomAnchor, constant: 22),
             
             hourlyCollectionView.heightAnchor.constraint(equalToConstant: 84),
@@ -370,10 +448,23 @@ class ViewController: UIViewController {
             hourlyCollectionView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor
             ),
+        ])*/
+        NSLayoutConstraint.activate([
+            hourlyCollectionView.topAnchor.constraint(equalTo: hourlyForecastLabel.bottomAnchor, constant: 22),
+            
+            hourlyCollectionView.heightAnchor.constraint(equalToConstant: 84),
+            
+            hourlyCollectionView.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor
+            ),
+            
+            hourlyCollectionView.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor
+            ),
         ])
         
         //dailyForecastLabel
-        NSLayoutConstraint.activate([
+        /*NSLayoutConstraint.activate([
             dailyForecastLabel.topAnchor.constraint(equalTo: hourlyCollectionView.bottomAnchor, constant: 29),
             
             dailyForecastLabel.leadingAnchor.constraint(
@@ -383,10 +474,21 @@ class ViewController: UIViewController {
             dailyForecastLabel.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor, constant: -35
             ),
+        ])*/
+        NSLayoutConstraint.activate([
+            dailyForecastLabel.topAnchor.constraint(equalTo: hourlyCollectionView.bottomAnchor, constant: 29),
+            
+            dailyForecastLabel.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor, constant: 35
+            ),
+            
+            dailyForecastLabel.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor, constant: -35
+            ),
         ])
         
         //dailyForecastLabel
-        NSLayoutConstraint.activate([
+        /*NSLayoutConstraint.activate([
             dailyForecastTableView.topAnchor.constraint(equalTo: dailyForecastLabel.bottomAnchor, constant: 16),
             
             dailyForecastTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -394,6 +496,32 @@ class ViewController: UIViewController {
             dailyForecastTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             dailyForecastTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])*/
+//        NSLayoutConstraint.activate([
+//            dailyForecastTableView.topAnchor.constraint(equalTo: dailyForecastLabel.bottomAnchor, constant: 16),
+//            
+//            dailyForecastTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            
+//            dailyForecastTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            
+//            dailyForecastTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+//        ])
+        
+        NSLayoutConstraint.activate([
+            dailyForecastTableView.topAnchor.constraint(equalTo: dailyForecastLabel.bottomAnchor, constant: 16),
+            
+            dailyForecastTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            
+            dailyForecastTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+//            dailyForecastTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+          descriptionLabel.topAnchor.constraint(equalTo: dailyForecastTableView.bottomAnchor, constant: 20),
+          descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+          descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+          descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
     
