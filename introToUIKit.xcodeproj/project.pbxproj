@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		F0BCB6F92C04E84A00263785 /* ViewControllerScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BCB6F82C04E84A00263785 /* ViewControllerScrollView.swift */; };
 		F0BCB6FB2C050BB800263785 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BCB6FA2C050BB800263785 /* ContentSizedTableView.swift */; };
+		F0BCB6FD2C050EC400263785 /* @Mock-onecall-lon.json in Resources */ = {isa = PBXBuildFile; fileRef = F0BCB6FC2C050EC400263785 /* @Mock-onecall-lon.json */; };
+		F0BCB6FF2C050F1300263785 /* @Mock-onecall-sp.json in Resources */ = {isa = PBXBuildFile; fileRef = F0BCB6FE2C050F1300263785 /* @Mock-onecall-sp.json */; };
+		F0BCB7012C050F5900263785 /* MockApiFilesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BCB7002C050F5900263785 /* MockApiFilesLoader.swift */; };
 		F0F78A5D2C02BB6D00A08E6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78A5C2C02BB6D00A08E6D /* AppDelegate.swift */; };
 		F0F78A5F2C02BB6D00A08E6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78A5E2C02BB6D00A08E6D /* SceneDelegate.swift */; };
 		F0F78A612C02BB6D00A08E6D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F78A602C02BB6D00A08E6D /* ViewController.swift */; };
@@ -46,6 +49,9 @@
 /* Begin PBXFileReference section */
 		F0BCB6F82C04E84A00263785 /* ViewControllerScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScrollView.swift; sourceTree = "<group>"; };
 		F0BCB6FA2C050BB800263785 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
+		F0BCB6FC2C050EC400263785 /* @Mock-onecall-lon.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "@Mock-onecall-lon.json"; sourceTree = "<group>"; };
+		F0BCB6FE2C050F1300263785 /* @Mock-onecall-sp.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "@Mock-onecall-sp.json"; sourceTree = "<group>"; };
+		F0BCB7002C050F5900263785 /* MockApiFilesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiFilesLoader.swift; sourceTree = "<group>"; };
 		F0F78A592C02BB6D00A08E6D /* introToUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = introToUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0F78A5C2C02BB6D00A08E6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0F78A5E2C02BB6D00A08E6D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +136,9 @@
 				F0FE79A62C03F97100D704A8 /* Core+Extensions.swift */,
 				F0BCB6F82C04E84A00263785 /* ViewControllerScrollView.swift */,
 				F0BCB6FA2C050BB800263785 /* ContentSizedTableView.swift */,
+				F0BCB6FC2C050EC400263785 /* @Mock-onecall-lon.json */,
+				F0BCB6FE2C050F1300263785 /* @Mock-onecall-sp.json */,
+				F0BCB7002C050F5900263785 /* MockApiFilesLoader.swift */,
 			);
 			path = introToUIKit;
 			sourceTree = "<group>";
@@ -255,6 +264,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0BCB6FD2C050EC400263785 /* @Mock-onecall-lon.json in Resources */,
+				F0BCB6FF2C050F1300263785 /* @Mock-onecall-sp.json in Resources */,
 				F0F78A662C02BB6F00A08E6D /* Assets.xcassets in Resources */,
 				F0F78A692C02BB6F00A08E6D /* Base in Resources */,
 			);
@@ -283,6 +294,7 @@
 			files = (
 				F0F78A612C02BB6D00A08E6D /* ViewController.swift in Sources */,
 				F0F78A8D2C02C64800A08E6D /* ViewControllerExample.swift in Sources */,
+				F0BCB7012C050F5900263785 /* MockApiFilesLoader.swift in Sources */,
 				F0FE79A12C03E82600D704A8 /* DailyForecastTableViewCell.swift in Sources */,
 				F0BCB6FB2C050BB800263785 /* ContentSizedTableView.swift in Sources */,
 				F0F78A5D2C02BB6D00A08E6D /* AppDelegate.swift in Sources */,
